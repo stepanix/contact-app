@@ -1,0 +1,31 @@
+/* palette colors */
+$body-background-color: #d3d3d3;
+$button-background-color: #e10600;
+$white-text-color: #ffffff;
+$default-text-color: #181818;
+$highlight-background-color: #6699ff;
+$winner-color: #ffb84d;
+
+/* font family */
+$font-family: "Roboto", sans-serif;
+
+/* header font sizes */
+$h1-font-size: calc(15px + 0.35vw);
+$h2-font-size: calc(13px + 0.35vw);
+
+/* font sizes */
+$font-size-normal: calc(10px + 0.24vw);
+$font-size-small: calc(8px + 0.45vw);
+$font-size-x-small: calc(6px + 0.25vw);
+
+/* font weight */
+$font-weight-light: 300 !default;
+$font-weight-normal: 400 !default;
+$font-weight-medium: 500 !default;
+$font-weight-large: 700 !default;
+
+/* line height */
+$line-height: calc(12px + 1.05vw);
+
+/* letter spacing */
+$letter-spacing: 0.2px;

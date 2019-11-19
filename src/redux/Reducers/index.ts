@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { contactReducer } from './ContactReducer';
 
 const rootReducer = combineReducers({
-	contacts: contactReducer
+	contact: contactReducer
 });
 
 export default rootReducer;

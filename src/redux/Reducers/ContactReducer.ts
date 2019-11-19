@@ -6,7 +6,8 @@ import {
 } from "../Actions/ContactAction";
 
 export const initialContactState = {
-    contacts: []
+    contactList: [],
+    error: {}
 };
 
 export const contactReducer = (
@@ -17,9 +18,9 @@ export const contactReducer = (
         case GET_CONTACTS:
             return { ...state };
         case GET_CONTACTS_SUCCESS:
-            return { ...state, contacts: action.payload.result };
+            return { ...state, contactList: action.payload };
         case GET_CONTACTS_ERROR:
-            return { ...state, contacts: action.payload.result };
+            return { ...state, error: action.payload };
         default:
             return state;
     }

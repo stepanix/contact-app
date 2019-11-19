@@ -4,21 +4,19 @@
  *  the particular action dispatched.
  */
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { ActionModel } from '../../shared/Models/ActionModel';
 
-import { listAccountTransactions } from '../../containers/AccountTransaction/Services/AccountTransactionService';
 import { getContactsSuccess, getContactsError, GET_CONTACTS } from '../Actions/ContactAction';
+import { getContactList } from '../../containers/Contact/Services/ContactListService';
+
 
 /**
- * fetchAccountTransactions is a special saga function that performs an application side effect
- * by invoking listAccountTransactions function service and sending an action payload. 
- * Please note: * the action payload contains an address paramter of type string
- * which is an argument in the listAccountTransactions function used by the service.
+ * getContacts is a special saga function that performs an application side effect
+ * by invoking getContactList function service .
  */
-function* getContacts(action: ActionModel) {
+function* getContacts() {
     try {
         // call to invoke service via listContacts function. Returns all contacts
-        const contacts = yield call(listAccountTransactions);
+        const contacts = yield call(getContactList);
         // put function dispatches the list of contacts (result) via getContactsSuccess action
         yield put(getContactsSuccess(contacts));
     } catch (error) {

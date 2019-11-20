@@ -7,6 +7,7 @@ import Tab from 'react-bootstrap/Tab';
 import Nav from 'react-bootstrap/Nav';
 import Modal from 'react-bootstrap/Modal';
 import Spinner from 'react-bootstrap/Spinner';
+import Badge from 'react-bootstrap/Badge';
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -36,7 +37,7 @@ const ContactList = () => {
     // useSelector hook is used to get data state from redux store.
     const contactList: any[] = useSelector((state: any) => groupContactList(state.contact.contactList));
     const isLoading: boolean = useSelector((state: any) => state.contact.isLoading);
-
+    
     /**
      * API calls, changes to DOM and other side effects are done in the component
      * lifecycle 'componentDidMount' and 'componentDidUpdate'. useEffect Hook is a
@@ -74,7 +75,10 @@ const ContactList = () => {
                             <Nav variant="pills" className="flex-column">
                                 {contactList.map((item: any) => (
                                     <Nav.Item key={item.group}>
-                                        <Nav.Link eventKey={item.group}>{item.group}</Nav.Link>
+                                        <Nav.Link eventKey={item.group}>
+                                            {item.group}
+                                            <Badge variant="light">{item.count}</Badge>
+                                        </Nav.Link>
                                     </Nav.Item>
                                 ))}
                             </Nav>

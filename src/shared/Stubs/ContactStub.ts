@@ -9,6 +9,26 @@ const ContactStub = [{
     "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/0therplanet/128.jpg"
 },
 {
+    "first": "Henry",
+    "last": "Bodomo",
+    "email": "henrosticka@gmail.com",
+    "street": "4742 Gloria Prairie",
+    "city": "Port Rickyborough",
+    "state": "Vermont",
+    "postCode": "07717",
+    "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/0therplanet/128.jpg"
+},
+{
+    "first": "Calvin",
+    "last": "Klien",
+    "email": "calvin4566@gmail.com",
+    "street": "4742 Gloria Prairie",
+    "city": "Port Rickyborough",
+    "state": "Vermont",
+    "postCode": "07717",
+    "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/0therplanet/128.jpg"
+},
+{
     "first": "Lew",
     "last": "Rowe",
     "email": "Queenie.Bergnaum@yahoo.com",

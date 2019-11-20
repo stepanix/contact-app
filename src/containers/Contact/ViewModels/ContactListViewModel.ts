@@ -24,3 +24,17 @@ export const groupContactList = (list: Array<ContactModel>) => {
 export const convertToUpper = (data: string) => {
     return data.toUpperCase();
 }
+
+export const getDefaultContactValues = () => {
+    let contact: ContactModel = {
+        first: '',
+        last: '',
+        email: '',
+        street: '',
+        city: '',
+        state: '',
+        postCode: '',
+        avatar: ''
+    };
+
+}

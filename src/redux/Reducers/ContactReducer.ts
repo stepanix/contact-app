@@ -7,7 +7,8 @@ import {
 
 export const initialContactState = {
     contactList: [],
-    error: {}
+    error: {},
+    isLoading: true
 };
 
 export const contactReducer = (
@@ -16,11 +17,11 @@ export const contactReducer = (
 ) => {
     switch (action.type) {
         case GET_CONTACTS:
-            return { ...state };
+            return { ...state, isLoading: true };
         case GET_CONTACTS_SUCCESS:
-            return { ...state, contactList: action.payload };
+            return { ...state, contactList: action.payload, isLoading: false };
         case GET_CONTACTS_ERROR:
-            return { ...state, error: action.payload };
+            return { ...state, error: action.payload, isLoading: false };
         default:
             return state;
     }

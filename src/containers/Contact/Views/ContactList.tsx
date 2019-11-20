@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Tab from 'react-bootstrap/Tab';
 import Nav from 'react-bootstrap/Nav';
 import Modal from 'react-bootstrap/Modal';
+import Spinner from 'react-bootstrap/Spinner';
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -34,6 +35,7 @@ const ContactList = () => {
 
     // useSelector hook is used to get data state from redux store.
     const contactList: any[] = useSelector((state: any) => groupContactList(state.contact.contactList));
+    const isLoading: boolean = useSelector((state: any) => state.contact.isLoading);
 
     /**
      * API calls, changes to DOM and other side effects are done in the component
@@ -56,7 +58,7 @@ const ContactList = () => {
     }
 
     return (<div className="container component-container">
-        {contactList.length > 0 ? <Card>
+        {!isLoading ? <Card>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>{contactSelected ? contactSelected.first : ''},  <span className="bold-text">{contactSelected ? convertToUpper(contactSelected.last) : ''} </span></Modal.Title>
@@ -96,7 +98,11 @@ const ContactList = () => {
                     </Row>
                 </Tab.Container>
             </div>
-        </Card> : " "}
+        </Card> : <div className="spinner-container">
+                <Spinner animation="border" role="status">
+                    <span className="sr-only">Loading...</span>
+                </Spinner>
+            </div>}
     </div>);
 
 };

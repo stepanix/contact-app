@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { GET_CONTACTS } from "../../../redux/Actions/ContactAction";
 import { ActionModel } from "../../../shared/Models/ActionModel";
 
-import { groupContactList, convertToUpper, getDefaultContactValues } from "../ViewModels/ContactListViewModel";
+import { groupContactList, convertToUpper } from "../ViewModels/ContactListViewModel";
 import { ContactModel } from "../Models/ContactModel";
 import ContactDetail from "./ContactDetail";
 

@@ -13,10 +13,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { GET_CONTACTS } from "../../../redux/Actions/ContactAction";
 import { ActionModel } from "../../../shared/Models/ActionModel";
 
-import { convertToUpper, 
-    getContactsSelectedByKey, 
-    getCountOfContactsSelectedByKey, 
-    getContactCardPosition } from "../ViewModels/ContactListViewModel";
+import {
+    convertToUpper,
+    getContactsSelectedByKey,
+    getCountOfContactsSelectedByKey,
+    getContactCardPosition
+} from "../ViewModels/ContactListViewModel";
 import { ContactModel } from "../Models/ContactModel";
 
 import { configJson } from "../../../configs/config";
@@ -81,14 +83,14 @@ const ContactList = () => {
 
     const getTabData = () => {
         let contactsSelected = getContactsSelectedByKey(contactList, key);
-        const details = <div> <hr></hr> <Row>
+        const details = <div style={{textAlign: 'center', width: '100%'}}> <hr></hr> {contactsSelected.length > 0 ? <Row>
             {contactsSelected.map((item: ContactModel, index: any) => (
                 <Col md={5} key={index}>
                     <div onMouseUp={handleMouseUp} className="custom-link" onClick={() => handleContactSelected(item)}> {item.name.first},  <span className="bold-text">{convertToUpper(item.name.last)}</span> </div>
                     <hr></hr>
                 </Col>
             ))}
-        </Row> </div>;
+        </Row> : <Row> <Col><div className="no-contact-found">No contact found</div></Col> </Row>} </div>;
         return details;
     };
 

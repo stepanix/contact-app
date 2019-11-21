@@ -1,1 +1,0 @@
-export const API_URL = `https://randomapi.com/api/ydmjf3az?key=LFLK-YIRJ-GURN-JKJZ&results=10`;

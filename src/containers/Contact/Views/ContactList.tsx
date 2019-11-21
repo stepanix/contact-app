@@ -1,75 +1,116 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import Card from 'react-bootstrap/Card';
+import Tabs from 'react-bootstrap/Tabs';
+import Tab from 'react-bootstrap/Tab';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Tab from 'react-bootstrap/Tab';
 import Nav from 'react-bootstrap/Nav';
-import Modal from 'react-bootstrap/Modal';
 import Spinner from 'react-bootstrap/Spinner';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Badge from 'react-bootstrap/Badge';
+
+
 
 import { useDispatch, useSelector } from "react-redux";
 
 import { GET_CONTACTS } from "../../../redux/Actions/ContactAction";
 import { ActionModel } from "../../../shared/Models/ActionModel";
 
-import { groupContactList, convertToUpper } from "../ViewModels/ContactListViewModel";
+import { getSortedContactList, convertToUpper, getContactsByKeySelected } from "../ViewModels/ContactListViewModel";
 import { ContactModel } from "../Models/ContactModel";
 import ContactDetail from "./ContactDetail";
+import { configJson } from "../../../configs/config";
 
 
-// function to dispatch contact list action.
 const getContactAction = (): ActionModel => ({
     type: GET_CONTACTS
 });
 
 const ContactList = () => {
 
-    // useState hook to show/hide modal window
     const [show, setShow] = useState(false);
+    const [key, setKey] = useState('a');
 
+    const [currentTop, setCurrentTop] = useState();
+    const [currentLeft, setCurrentLeft] = useState();
     const [contactSelected, setContactSelected] = useState();
-
-    // useDispatch hook is used to dispatch redux actions from presentation layer
     const dispatch = useDispatch();
 
-    // useSelector hook is used to get data state from redux store.
-    const contactList: any[] = useSelector((state: any) => groupContactList(state.contact.contactList));
+    const contactList: any[] = useSelector((state: any) => state.contact.contactList);
     const isLoading: boolean = useSelector((state: any) => state.contact.isLoading);
-    
-    /**
-     * API calls, changes to DOM and other side effects are done in the component
-     * lifecycle 'componentDidMount' and 'componentDidUpdate'. useEffect Hook is a
-     * combination of these lifecycles.
-    */
+
+    let contactRef = useRef<Array<HTMLDivElement | null>>([]);
+
+
     useEffect(() => {
-        /**
-         * dispatch GET_CONTACTS action as soon as component is mounted. In a normal
-         * class based component, this would be done in the 'componentDidMount' method.
-         */
         dispatch(getContactAction());
     }, [dispatch]);
+
+    useEffect(() => {
+        if (contactList.length > 0) {
+            contactRef.current = contactRef.current.slice(0, contactList.length);
+            // console.log('contactRef', contactRef);
+        }
+
+    }, [contactList]);
+
 
     const handleClose = () => setShow(false);
 
     const handleContactSelected = (contact: ContactModel) => {
-        setContactSelected(contact);
-        setShow(true);
+        console.log(contactRef.current);
+        // setContactSelected(contact);
+        // setShow(true);
+    }
+
+    // console.log(contactList);
+    // const handleMouseUp = () => {
+    //    // const pos =  contactRef.current;
+    //    console.log('ref pos', contactRef.current);
+
+    //    // let xPos = document.getElementById(contactId).getBoundingClientRect();
+    //     //setCurrentLeft(event.clientX - event.target.offsetLeft - 10);
+    //     //setCurrentTop(event.clientY - event.target.offsetTop - 10);
+    // }
+
+    const getTabContent = () => {
+        console.log('filtered contacts', getContactsByKeySelected(contactList, key));
+        return key;
     }
 
     return (<div className="container component-container">
+
+        <div className="page-title">{configJson.title}</div>
+
         {!isLoading ? <Card>
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>{contactSelected ? contactSelected.first : ''},  <span className="bold-text">{contactSelected ? convertToUpper(contactSelected.last) : ''} </span></Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <ContactDetail contact={contactSelected} />
-                </Modal.Body>
-            </Modal>
             <div className="tab-container">
-                <Tab.Container defaultActiveKey={contactList[0].group}>
+
+                {show ?
+                    <div style={{ zIndex: 1000, width: '50%', position: 'relative' }}>
+
+                        <Card style={{ position: 'absolute', backgroundColor: '#E0E0E0' }}>
+                            <div className="close-button" onClick={() => handleClose()}> X </div>
+                            <Card.Body>
+                                <Card.Title>{contactSelected ? contactSelected.name.first : ''},  <span className="bold-text">{contactSelected ? convertToUpper(contactSelected.name.last) : ''} </span></Card.Title>
+                                <Card.Text>
+                                    testing me
+                                <ContactDetail contact={contactSelected} />
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    </div>
+                    : ''}
+
+                    <Tabs id="contacts-tab" activeKey={key} onSelect={(k: any) => setKey(k)}>
+                        {configJson.tabs.map((item: any, index: any) => (
+                            <Tab key={index} eventKey={item} title={item}>
+                                {getTabContent()}
+                            </Tab>
+                        ))}
+                    </Tabs>
+
+                {/* <Tab.Container defaultActiveKey={contactList[0].group}>
                     <Row>
                         <Col sm={2}>
                             <Nav variant="pills" className="flex-column">
@@ -77,7 +118,7 @@ const ContactList = () => {
                                     <Nav.Item key={item.group}>
                                         <Nav.Link eventKey={item.group}>
                                             {item.group}
-                                            <Badge variant="light">{item.count}</Badge>
+                                            <Badge className="custom-badge" variant="light">{item.count}</Badge>
                                         </Nav.Link>
                                     </Nav.Item>
                                 ))}
@@ -85,22 +126,24 @@ const ContactList = () => {
                         </Col>
                         <Col className="col-container text-center" sm={10}>
                             <Tab.Content>
-                                {contactList.map((item: any) => (
-                                    <Tab.Pane key={item.group} eventKey={item.group}>
+                                {contactList.map((item: any, index: any) => (
+                                    <Tab.Pane key={item.group} eventKey={item.group} onEnter={() => handleClose()}>
                                         <Row>
-                                            {item.contactList.map((data: any) => (
-                                                <Col md={5} key={data.email}>
-                                                    <div className="custom-link" onClick={() => handleContactSelected(data)}> {data.first},  <span className="bold-text">{convertToUpper(data.last)}</span> </div>
+                                            {item.contactList.map((data: any, index: any) => (
+                                                <Col md={5} key={index}>
+                                                    <div ref={(el) => {contactRef.current[index] = el}} className="custom-link" onClick={() => handleContactSelected(data)}> {data.name.first},  <span className="bold-text">{convertToUpper(data.name.last)}</span> </div>
                                                     <hr></hr>
+
                                                 </Col>
                                             ))}
                                         </Row>
                                     </Tab.Pane>
                                 ))}
+
                             </Tab.Content>
                         </Col>
                     </Row>
-                </Tab.Container>
+                </Tab.Container> */}
             </div>
         </Card> : <div className="spinner-container">
                 <Spinner animation="border" role="status">
@@ -110,5 +153,6 @@ const ContactList = () => {
     </div>);
 
 };
+
 
 export default ContactList

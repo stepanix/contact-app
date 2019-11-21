@@ -1,11 +1,11 @@
+import { NameModel } from "./NameModel";
+import { LocationModel } from "./LocationModel";
+import { PictureModel } from "./PictureModel";
+
 export interface ContactModel {
-    first: string;
-    last: string;
+    name: NameModel;
+    location: LocationModel;
     email: string;
     phone: string;
-    street: string;
-    city: string;
-    state: string;
-    postCode: string
-    avatar: string;
+    picture: PictureModel;
 }

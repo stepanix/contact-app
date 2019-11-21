@@ -1,3 +1,15 @@
 .bold-text {
     font-weight: $font-weight-large;
 }
+
+.custom-badge {
+    background-color: $badge-color;
+    color: $white-text-color;
+    margin: 8px;
+}
+
+.page-title {
+    text-align: center;
+    font-size: large;
+    font-weight: 600;
+}

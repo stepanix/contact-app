@@ -6,3 +6,18 @@
   margin: auto;
   min-width: 100%;
 }
+
+.close-button {
+     line-height: 12px;
+     width: 18px;
+     font-family: $font-family;
+     font-size: large;
+     font-weight: bold;
+     margin-top: 1px;
+     margin-right: 8px;
+     position:absolute;
+     top:0;
+     right:0;
+     padding: 16px;
+     cursor: pointer;
+}

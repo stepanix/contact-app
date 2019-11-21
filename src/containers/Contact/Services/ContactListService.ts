@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { API_URL } from '../../../configs/environment.config';
+import { configJson } from '../../../configs/config';
 
 
 export const getContactList = async () => {
-    const endPoint = API_URL;
+    const endPoint = configJson.userUrl + '?results=' + configJson.numberCards;
     let res = await axios.get(endPoint);
     return res.data.results;
 };

@@ -1,4 +1,4 @@
 export interface StreetModel {
-    number: string;
+    number: number;
     name: string;
 }

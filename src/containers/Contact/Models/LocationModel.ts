@@ -4,5 +4,5 @@ export interface LocationModel {
     street: StreetModel;
     city: string;
     state: string;
-    postcode: string;
+    postcode: number;
 }

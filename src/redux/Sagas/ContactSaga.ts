@@ -4,15 +4,15 @@ import { getContactsSuccess, getContactsError, GET_CONTACTS } from '../Actions/C
 import { getContactList } from '../../containers/Contact/Services/ContactListService';
 
 
-function* getContacts() {
+export function* getContactsSaga() {
     try {
         const contacts = yield call(getContactList);
-        yield put(getContactsSuccess(contacts));
+        yield put(getContactsSuccess(contacts.results));
     } catch (error) {
         yield put(getContactsError(error));
     }
 }
 
 export function* actionGetContactsWatcher() {
-    yield takeEvery(GET_CONTACTS, getContacts);
+    yield takeEvery(GET_CONTACTS, getContactsSaga);
 }

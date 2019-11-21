@@ -1,4 +1,3 @@
-// export const API_URL = `https://api.randomuser.me?results=120`;
 
 export var configJson = {
     "title": "Contact List",

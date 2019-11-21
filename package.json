@@ -44,6 +44,8 @@
   "devDependencies": {
     "axios-mock-adapter": "^1.17.0",
     "jest": "^24.9.0",
-    "jest-cli": "^24.9.0"
+    "jest-cli": "^24.9.0",
+    "redux-saga-test-plan": "^4.0.0-rc.3",
+    "redux-saga-utils": "^1.0.0"
   }
 }

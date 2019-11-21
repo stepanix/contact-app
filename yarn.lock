@@ -1602,6 +1602,16 @@ array-includes@^3.0.3:
     define-properties "^1.1.2"
     es-abstract "^1.7.0"
 
+array-map@0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/array-map/-/array-map-0.0.0.tgz#88a2bab73d1cf7bcd5c1b118a003f66f665fa662"
+  integrity sha1-iKK6tz0c97zVwbEYoAP2b2ZfpmI=
+
+array-reduce@0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/array-reduce/-/array-reduce-0.0.0.tgz#173899d3ffd1c7d9383e4479525dbe278cab5f2b"
+  integrity sha1-FziZ0//Rx9k4PkR5Ul2+J4yrXys=
+
 array-union@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/array-union/-/array-union-1.0.2.tgz#9a34410e4f4e3da23dea375be5be70f24778ec39"
@@ -1851,6 +1861,14 @@ babel-preset-react-app@^9.0.2:
     babel-plugin-dynamic-import-node "2.3.0"
     babel-plugin-macros "2.6.1"
     babel-plugin-transform-react-remove-prop-types "0.4.24"
+
+babel-runtime@6.23.0:
+  version "6.23.0"
+  resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.23.0.tgz#0a9489f144de70efb3ce4300accdb329e2fc543b"
+  integrity sha1-CpSJ8UTecO+zzkMArM2zKeL8VDs=
+  dependencies:
+    core-js "^2.4.0"
+    regenerator-runtime "^0.10.0"
 
 babel-runtime@^6.26.0:
   version "6.26.0"
@@ -2536,6 +2554,11 @@ core-js@3.2.1:
 core-js@^2.4.0:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.9.tgz#6b4b214620c834152e179323727fc19741b084f2"
+
+core-js@^2.4.1:
+  version "2.6.10"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.10.tgz#8a5b8391f8cc7013da703411ce5b585706300d7f"
+  integrity sha512-I39t74+4t+zau64EN1fE5v2W31Adtc/REhzWN+gWRRXg6WH5qAsZm62DHpQ1+Yhe4047T55jvzz7MUqF/dBBlA==
 
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
@@ -3771,6 +3794,11 @@ for-own@^0.1.3:
   dependencies:
     for-in "^1.0.1"
 
+foreach@2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/foreach/-/foreach-2.0.4.tgz#cc5d0d8ae1d46cc9a555c2682f910977859935df"
+  integrity sha1-zF0NiuHUbMmlVcJoL5EJd4WZNd8=
+
 forever-agent@~0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/forever-agent/-/forever-agent-0.6.1.tgz#fbc71f0c41adeb37f96c577ad1ed42d8fdacca91"
@@ -3870,6 +3898,11 @@ fsevents@^1.2.7:
   dependencies:
     nan "^2.12.1"
     node-pre-gyp "^0.12.0"
+
+fsm-iterator@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/fsm-iterator/-/fsm-iterator-1.1.0.tgz#337de45de19eb205788cf02e3a955ec206760dec"
+  integrity sha1-M33kXeGesgV4jPAuOpVewgZ2Dew=
 
 fstream@^1.0.0, fstream@^1.0.12:
   version "1.0.12"
@@ -4391,6 +4424,11 @@ indexes-of@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/indexes-of/-/indexes-of-1.0.1.tgz#f30f716c8e2bd346c7b67d3df3915566a7c05607"
 
+indexof@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/indexof/-/indexof-0.0.1.tgz#82dc336d232b9062179d05ab3293a66059fd435d"
+  integrity sha1-gtwzbSMrkGIXnQWrMpOmYFn9Q10=
+
 infer-owner@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/infer-owner/-/infer-owner-1.0.4.tgz#c4cefcaa8e51051c2a40ba2ce8a3d27295af9467"
@@ -4725,6 +4763,11 @@ is-windows@^1.0.2:
 is-wsl@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/is-wsl/-/is-wsl-1.1.0.tgz#1f16e4aa22b04d1336b66188a66af3c600c3a66d"
+
+isarray@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/isarray/-/isarray-0.0.1.tgz#8a18acfca9a8f4177e09abfc6038939b05d1eedf"
+  integrity sha1-ihis/Kmo9Bd+Cav8YDiTmwXR7t8=
 
 isarray@1.0.0, isarray@^1.0.0, isarray@~1.0.0:
   version "1.0.0"
@@ -5256,6 +5299,11 @@ json-stringify-safe@~5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
 
+json3@3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/json3/-/json3-3.3.0.tgz#0e9e7f6c5d270b758929af4d6fefdc84bd66e259"
+  integrity sha1-Dp5/bF0nC3WJKa9Nb+/chL1m4lk=
+
 json3@^3.3.2:
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/json3/-/json3-3.3.3.tgz#7fc10e375fc5ae42c4705a5cc0aa6f62be305b81"
@@ -5442,6 +5490,16 @@ locate-path@^3.0.0:
 lodash._reinterpolate@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/lodash._reinterpolate/-/lodash._reinterpolate-3.0.0.tgz#0ccf2d89166af03b3663c796538b75ac6e114d9d"
+
+lodash.isequal@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
+  integrity sha1-QVxEePK8wwEgwizhDtMib30+GOA=
+
+lodash.ismatch@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/lodash.ismatch/-/lodash.ismatch-4.4.0.tgz#756cb5150ca3ba6f11085a78849645f188f85f37"
+  integrity sha1-dWy1FQyjum8RCFp4hJZF8Yj4Xzc=
 
 lodash.memoize@^4.1.2:
   version "4.1.2"
@@ -6085,6 +6143,11 @@ object-inspect@^1.6.0:
 object-is@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/object-is/-/object-is-1.0.1.tgz#0aa60ec9989a0b3ed795cf4d06f62cf1ad6539b6"
+
+object-keys@0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/object-keys/-/object-keys-0.5.0.tgz#09e211f3e00318afc4f592e36e7cdc10d9ad7293"
+  integrity sha1-CeIR8+ADGK/E9ZLjbnzcENmtcpM=
 
 object-keys@^1.0.11, object-keys@^1.0.12, object-keys@^1.1.1:
   version "1.1.1"
@@ -7598,6 +7661,31 @@ redent@^1.0.0:
     indent-string "^2.1.0"
     strip-indent "^1.0.1"
 
+redux-saga-test-plan@^4.0.0-rc.3:
+  version "4.0.0-rc.3"
+  resolved "https://registry.yarnpkg.com/redux-saga-test-plan/-/redux-saga-test-plan-4.0.0-rc.3.tgz#bde05527202be652859e68d15cdabe79ffa7509a"
+  integrity sha512-18Ha1AWmP4Xt64cSyJv2j7sH8lwQzdk/LByiyhoNyuqyhzkQzlKlflHr3LqiSCzn3e2AgFxagynto8XGRqsHcg==
+  dependencies:
+    core-js "^2.4.1"
+    fsm-iterator "^1.1.0"
+    lodash.isequal "^4.5.0"
+    lodash.ismatch "^4.4.0"
+    object-assign "^4.1.0"
+    util-inspect "^0.1.8"
+
+redux-saga-utils@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/redux-saga-utils/-/redux-saga-utils-1.0.0.tgz#e3bba11a1b0877a2a000f1f04dc0b3d606330a29"
+  integrity sha1-47uhGhsId6KgAPHwTcCz1gYzCik=
+  dependencies:
+    babel-runtime "6.23.0"
+    redux-saga "0.14.3"
+
+redux-saga@0.14.3:
+  version "0.14.3"
+  resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.14.3.tgz#28cd2c5b49cf780a1de25875765724150c630513"
+  integrity sha1-KM0sW0nPeAod4lh1dlckFQxjBRM=
+
 redux-saga@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-1.1.3.tgz#9f3e6aebd3c994bbc0f6901a625f9a42b51d1112"
@@ -7624,6 +7712,11 @@ regenerate@^1.4.0:
 regenerator-runtime@0.13.3, regenerator-runtime@^0.13.2:
   version "0.13.3"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.3.tgz#7cf6a77d8f5c6f60eb73c5fc1955b2ceb01e6bf5"
+
+regenerator-runtime@^0.10.0:
+  version "0.10.5"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.10.5.tgz#336c3efc1220adcedda2c9fab67b5a7955a33658"
+  integrity sha1-M2w+/BIgrc7dosn6tntaeVWjNlg=
 
 regenerator-runtime@^0.11.0:
   version "0.11.1"
@@ -8937,6 +9030,19 @@ use@^3.1.0:
 util-deprecate@^1.0.1, util-deprecate@~1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
+
+util-inspect@^0.1.8:
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/util-inspect/-/util-inspect-0.1.8.tgz#2b39dbcd2d921f2d8430923caff40f4b5cea5db1"
+  integrity sha1-KznbzS2SHy2EMJI8r/QPS1zqXbE=
+  dependencies:
+    array-map "0.0.0"
+    array-reduce "0.0.0"
+    foreach "2.0.4"
+    indexof "0.0.1"
+    isarray "0.0.1"
+    json3 "3.3.0"
+    object-keys "0.5.0"
 
 util.promisify@1.0.0, util.promisify@^1.0.0, util.promisify@~1.0.0:
   version "1.0.0"

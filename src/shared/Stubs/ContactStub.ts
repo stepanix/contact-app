@@ -1,6 +1,5 @@
-import { ContactModel } from "../../containers/Contact/Models/ContactModel";
 
-const ContactStub: ContactModel[] = [{
+const ContactStub = [{
     name: {
         first: "Miriam",
         last: "Torres"

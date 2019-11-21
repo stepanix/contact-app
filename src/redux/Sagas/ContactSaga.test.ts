@@ -1,15 +1,24 @@
-import { expectSaga } from 'redux-saga-test-plan';
-import { getContactsSaga } from './ContactSaga';
+import { expectSaga, testSaga } from 'redux-saga-test-plan';
+import { getContactsSaga, actionGetContactsWatcher } from './ContactSaga';
 import ContactStub from '../../shared/Stubs/ContactStub';
 import { GET_CONTACTS, GET_CONTACTS_SUCCESS, GET_CONTACTS_ERROR } from '../Actions/ContactAction';
 import { getContactList } from '../../containers/Contact/Services/ContactListService';
 import { ActionModel } from '../../shared/Models/ActionModel';
+import appWatcherSagas from '.';
 
 describe('Contact Sagas', () => {
 
     const getContactAction = (): ActionModel => ({
         type: GET_CONTACTS
     });
+
+   it('listen and react on GET_CONTACTS', () => {
+        testSaga(actionGetContactsWatcher)
+            .next()
+            .takeEvery(GET_CONTACTS, getContactsSaga)
+            .finish()
+            .isDone()
+    })
 
     it('provides a list of contacts after the getContactList API call', () => {
         return expectSaga(getContactsSaga)

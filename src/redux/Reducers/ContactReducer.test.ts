@@ -1,6 +1,7 @@
 import ContactStub from "../../shared/Stubs/ContactStub";
 import * as fromContactReducer from './ContactReducer';
-import { getContactsSuccess, getContactsError } from "../Actions/ContactAction";
+import { getContactsSuccess, getContactsError, getContacts } from "../Actions/ContactAction";
+import { ActionModel } from "../../shared/Models/ActionModel";
 
 describe('contactReducer', () => {
 
@@ -9,6 +10,37 @@ describe('contactReducer', () => {
         error: { error: 'error' },
         isLoading: false
     };
+
+    it('should get default state', () => {
+        const emptyAction: ActionModel = {type: ''};
+        expect(
+            fromContactReducer.contactReducer(
+                fromContactReducer.initialContactState,
+                emptyAction
+            ).isLoading
+        ).toEqual(true);
+        expect(
+            fromContactReducer.contactReducer(
+                fromContactReducer.initialContactState,
+                emptyAction
+            ).contactList.length
+        ).toEqual(0);
+        expect(
+            fromContactReducer.contactReducer(
+                fromContactReducer.initialContactState,
+                emptyAction
+            ).error
+        ).toBeTruthy();
+    });
+
+    it('should set isLoading to true', () => {
+        expect(
+            fromContactReducer.contactReducer(
+                fromContactReducer.initialContactState,
+                getContacts()
+            ).isLoading
+        ).toEqual(true);
+    });
 
     it('should list contacts successfully and set isLoading to false', () => {
         expect(

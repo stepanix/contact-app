@@ -1,4 +1,4 @@
-import {expectSaga} from 'redux-saga-test-plan';
+import { expectSaga } from 'redux-saga-test-plan';
 import { getContactsSaga } from './ContactSaga';
 import ContactStub from '../../shared/Stubs/ContactStub';
 import { GET_CONTACTS, GET_CONTACTS_SUCCESS, GET_CONTACTS_ERROR } from '../Actions/ContactAction';
@@ -13,42 +13,42 @@ describe('Contact Sagas', () => {
 
     it('provides a list of contacts after the getContactList API call', () => {
         return expectSaga(getContactsSaga)
-          .provide({
-            call(effect, next) {
-              if (effect.fn === getContactList) {
-                const id = effect.args[0];
-                return { results: ContactStub };
-              }
-      
-              // Allow Redux Saga to handle other `call` effects
-              return next();
-            },
-          })
-          .put({
-            type: GET_CONTACTS_SUCCESS,
-            payload: ContactStub,
-          })
-          .dispatch(getContactAction())
-          .run();
-      });
+            .provide({
+                call(effect, next) {
+                    if (effect.fn === getContactList) {
+                        const id = effect.args[0];
+                        return { results: ContactStub };
+                    }
 
-      it('should throw error in the saga after the getContactList API call', () => {
+                    // Allow Redux Saga to handle other `call` effects
+                    return next();
+                },
+            })
+            .put({
+                type: GET_CONTACTS_SUCCESS,
+                payload: ContactStub,
+            })
+            .dispatch(getContactAction())
+            .run();
+    });
+
+    it('should throw error in the saga after the getContactList API call', () => {
         const error = new Error('An error occurred...');
-      
+
         return expectSaga(getContactsSaga)
-          .provide({
-            call(effect, next) {
-              if (effect.fn === getContactList) {
-                throw error;
-              }
-      
-              // Allow Redux Saga to handle other `call` effects
-              return next();
-            },
-          })
-          .put({ type: GET_CONTACTS_ERROR, payload: error })
-          .dispatch(getContactAction())
-          .run();
-      });
-    
+            .provide({
+                call(effect, next) {
+                    if (effect.fn === getContactList) {
+                        throw error;
+                    }
+
+                    // Allow Redux Saga to handle other `call` effects
+                    return next();
+                },
+            })
+            .put({ type: GET_CONTACTS_ERROR, payload: error })
+            .dispatch(getContactAction())
+            .run();
+    });
+
 })

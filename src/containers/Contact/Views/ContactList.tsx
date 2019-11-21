@@ -83,9 +83,9 @@ const ContactList = () => {
 
     const getTabData = () => {
         let contactsSelected = getContactsSelectedByKey(contactList, key);
-        const details = <div style={{textAlign: 'center', width: '100%'}}> <hr></hr> {contactsSelected.length > 0 ? <Row>
+        const details = <div> <hr></hr> {contactsSelected.length > 0 ? <Row>
             {contactsSelected.map((item: ContactModel, index: any) => (
-                <Col md={5} key={index}>
+                <Col md={6} key={index}>
                     <div onMouseUp={handleMouseUp} className="custom-link" onClick={() => handleContactSelected(item)}> {item.name.first},  <span className="bold-text">{convertToUpper(item.name.last)}</span> </div>
                     <hr></hr>
                 </Col>

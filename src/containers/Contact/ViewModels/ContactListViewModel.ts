@@ -19,7 +19,7 @@ export const convertToUpper = (data: string) => {
 }
 
 export const getContactCardPosition = (data: any) => {
-    const posX =  data.left - data.width;
+    const posX =  data.left - (data.width / 5);
     const posY = data.top - data.height;
     const result = {
         x: posX,

@@ -72,7 +72,7 @@ const ContactList = () => {
     const contactCardView = () => {
         return <div className="container"> {
             show ?
-                <div style={{ zIndex: 1000, position: 'relative', left: currentLeft, top: currentTop }}>
+                <div style={{ zIndex: 1000, position: 'fixed', display: 'block', minWidth: '100%', left: currentLeft, top: currentTop }}>
                     <Card className="contact-card-container">
                         <div className="close-button" onClick={() => setShow(false)}> X </div>
                         <div className="contact-card-header">{contactSelected ? contactSelected.name.first : ''},  <span className="bold-text">{contactSelected ? convertToUpper(contactSelected.name.last) : ''} </span></div>

@@ -1,26 +1,27 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 
 import Card from 'react-bootstrap/Card';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Nav from 'react-bootstrap/Nav';
 import Spinner from 'react-bootstrap/Spinner';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Badge from 'react-bootstrap/Badge';
-
-
 
 import { useDispatch, useSelector } from "react-redux";
 
 import { GET_CONTACTS } from "../../../redux/Actions/ContactAction";
 import { ActionModel } from "../../../shared/Models/ActionModel";
 
-import { getSortedContactList, convertToUpper, getContactsByKeySelected } from "../ViewModels/ContactListViewModel";
+import { convertToUpper, 
+    getContactsSelectedByKey, 
+    getCountOfContactsSelectedByKey, 
+    getContactCardPosition } from "../ViewModels/ContactListViewModel";
 import { ContactModel } from "../Models/ContactModel";
-import ContactDetail from "./ContactDetail";
+
 import { configJson } from "../../../configs/config";
+
+import ContactDetail from "./ContactDetail";
 
 
 const getContactAction = (): ActionModel => ({
@@ -35,48 +36,64 @@ const ContactList = () => {
     const [currentTop, setCurrentTop] = useState();
     const [currentLeft, setCurrentLeft] = useState();
     const [contactSelected, setContactSelected] = useState();
+
     const dispatch = useDispatch();
 
     const contactList: any[] = useSelector((state: any) => state.contact.contactList);
     const isLoading: boolean = useSelector((state: any) => state.contact.isLoading);
 
-    let contactRef = useRef<Array<HTMLDivElement | null>>([]);
-
-
     useEffect(() => {
         dispatch(getContactAction());
     }, [dispatch]);
 
-    useEffect(() => {
-        if (contactList.length > 0) {
-            contactRef.current = contactRef.current.slice(0, contactList.length);
-            // console.log('contactRef', contactRef);
+
+    const handleKeySelected = (key: string) => {
+        if (show) {
+            setShow(false);
         }
-
-    }, [contactList]);
-
-
-    const handleClose = () => setShow(false);
+        setKey(key);
+    };
 
     const handleContactSelected = (contact: ContactModel) => {
-        console.log(contactRef.current);
-        // setContactSelected(contact);
-        // setShow(true);
+        setContactSelected(contact);
     }
 
-    // console.log(contactList);
-    // const handleMouseUp = () => {
-    //    // const pos =  contactRef.current;
-    //    console.log('ref pos', contactRef.current);
+    const handleMouseUp = (event: any) => {
+        const pos = getContactCardPosition(event.currentTarget.getBoundingClientRect());
+        if (!show) {
+            setShow(true);
+        }
+        setCurrentLeft(pos.x);
+        setCurrentTop(pos.y);
+    }
 
-    //    // let xPos = document.getElementById(contactId).getBoundingClientRect();
-    //     //setCurrentLeft(event.clientX - event.target.offsetLeft - 10);
-    //     //setCurrentTop(event.clientY - event.target.offsetTop - 10);
-    // }
+    const contactCardView = () => {
+        return <div className="container"> {
+            show ?
+                <div style={{ zIndex: 1000, position: 'relative', left: currentLeft, top: currentTop }}>
+                    <Card className="contact-card-container">
+                        <div className="close-button" onClick={() => setShow(false)}> X </div>
+                        <div className="contact-card-header">{contactSelected ? contactSelected.name.first : ''},  <span className="bold-text">{contactSelected ? convertToUpper(contactSelected.name.last) : ''} </span></div>
+                        <div> {contactSelected ? <ContactDetail contact={contactSelected} /> : ''} </div>
+                    </Card></div>
+                : ''} </div>
+    };
 
-    const getTabContent = () => {
-        console.log('filtered contacts', getContactsByKeySelected(contactList, key));
-        return key;
+    const getTabData = () => {
+        let contactsSelected = getContactsSelectedByKey(contactList, key);
+        const details = <div> <hr></hr> <Row>
+            {contactsSelected.map((item: ContactModel, index: any) => (
+                <Col md={5} key={index}>
+                    <div onMouseUp={handleMouseUp} className="custom-link" onClick={() => handleContactSelected(item)}> {item.name.first},  <span className="bold-text">{convertToUpper(item.name.last)}</span> </div>
+                    <hr></hr>
+                </Col>
+            ))}
+        </Row> </div>;
+        return details;
+    };
+
+    const getTitleTab = (key: string) => {
+        return <div> {key} {" "} <Badge variant="info">{getCountOfContactsSelectedByKey(contactList, key)} </Badge></div>;
     }
 
     return (<div className="container component-container">
@@ -86,64 +103,16 @@ const ContactList = () => {
         {!isLoading ? <Card>
             <div className="tab-container">
 
-                {show ?
-                    <div style={{ zIndex: 1000, width: '50%', position: 'relative' }}>
+                {contactCardView()}
 
-                        <Card style={{ position: 'absolute', backgroundColor: '#E0E0E0' }}>
-                            <div className="close-button" onClick={() => handleClose()}> X </div>
-                            <Card.Body>
-                                <Card.Title>{contactSelected ? contactSelected.name.first : ''},  <span className="bold-text">{contactSelected ? convertToUpper(contactSelected.name.last) : ''} </span></Card.Title>
-                                <Card.Text>
-                                    testing me
-                                <ContactDetail contact={contactSelected} />
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </div>
-                    : ''}
+                <Tabs id="contacts-tab" activeKey={key} onSelect={(k: any) => handleKeySelected(k)}>
+                    {configJson.tabs.map((item: any, index: any) => (
+                        <Tab className="contact-tab-content" key={index} eventKey={item} title={getTitleTab(item)}>
+                            {getTabData()}
+                        </Tab>
+                    ))}
+                </Tabs>
 
-                    <Tabs id="contacts-tab" activeKey={key} onSelect={(k: any) => setKey(k)}>
-                        {configJson.tabs.map((item: any, index: any) => (
-                            <Tab key={index} eventKey={item} title={item}>
-                                {getTabContent()}
-                            </Tab>
-                        ))}
-                    </Tabs>
-
-                {/* <Tab.Container defaultActiveKey={contactList[0].group}>
-                    <Row>
-                        <Col sm={2}>
-                            <Nav variant="pills" className="flex-column">
-                                {contactList.map((item: any) => (
-                                    <Nav.Item key={item.group}>
-                                        <Nav.Link eventKey={item.group}>
-                                            {item.group}
-                                            <Badge className="custom-badge" variant="light">{item.count}</Badge>
-                                        </Nav.Link>
-                                    </Nav.Item>
-                                ))}
-                            </Nav>
-                        </Col>
-                        <Col className="col-container text-center" sm={10}>
-                            <Tab.Content>
-                                {contactList.map((item: any, index: any) => (
-                                    <Tab.Pane key={item.group} eventKey={item.group} onEnter={() => handleClose()}>
-                                        <Row>
-                                            {item.contactList.map((data: any, index: any) => (
-                                                <Col md={5} key={index}>
-                                                    <div ref={(el) => {contactRef.current[index] = el}} className="custom-link" onClick={() => handleContactSelected(data)}> {data.name.first},  <span className="bold-text">{convertToUpper(data.name.last)}</span> </div>
-                                                    <hr></hr>
-
-                                                </Col>
-                                            ))}
-                                        </Row>
-                                    </Tab.Pane>
-                                ))}
-
-                            </Tab.Content>
-                        </Col>
-                    </Row>
-                </Tab.Container> */}
             </div>
         </Card> : <div className="spinner-container">
                 <Spinner animation="border" role="status">

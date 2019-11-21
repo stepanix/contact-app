@@ -36,3 +36,21 @@
   text-align: center;
 }
 
+.col-container {
+  top: 10px;
+  left: 12px;
+}
+
+.contact-card-container {
+  position: absolute;
+  background-color: $card-background-color;
+  padding-bottom: 16px;
+}
+
+.contact-card-header {
+  padding: 12px;
+}
+
+.contact-tab-content {
+  padding: 2px;
+}

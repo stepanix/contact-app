@@ -7,9 +7,5 @@ Enzyme.configure({adapter: new Adapter()});
 
 it('renders without crashing', () => {
     const wrapper = shallow(<App />);
-    expect(wrapper.exists()).toBe(true);
-    // store = mockStore(initialState)
-    // const div = document.createElement('div');
-    // ReactDOM.render(<Provider store={store}><App /></Provider>, div);
-
+      expect(wrapper.exists()).toBe(true);
 });

@@ -14,13 +14,25 @@ const initialState = {
     isLoading: true
 };
 
+describe('<ContactList />', () => {
 
-it('renders without crashing', () => {
-    const store = mockStore(initialState);
-    const wrapper = shallow(
-        <Provider store={store}>
-            <ContactList />
-        </Provider>
-    )
-    expect(wrapper.exists()).toBe(true);
+    let wrapper: any;
+
+    beforeEach(() => {
+        const store = mockStore(initialState);
+        wrapper = shallow(
+            <Provider store={store}>
+                <ContactList />
+            </Provider>
+        )
+    });
+
+    afterEach(() => {
+        jest.clearAllMocks();
+    });
+
+    it('renders without crashing', () => {
+        expect(wrapper.exists()).toBe(true);
+    });
+
 });

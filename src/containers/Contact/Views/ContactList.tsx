@@ -41,7 +41,7 @@ const ContactList = () => {
 
     const dispatch = useDispatch();
 
-    const contactList: any[] = useSelector((state: any) => state.contact.contactList);
+    const contactList: ContactModel[] = useSelector((state: any) => state.contact.contactList);
     const isLoading: boolean = useSelector((state: any) => state.contact.isLoading);
 
     useEffect(() => {

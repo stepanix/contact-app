@@ -1,5 +1,5 @@
 import React from 'react';
-import Enzyme, { shallow, mount } from "enzyme";
+import Enzyme, { mount } from "enzyme";
 import Adapter from 'enzyme-adapter-react-16';
 import ContactList from './ContactList';
 import { Provider } from 'react-redux';
@@ -8,6 +8,7 @@ import configureMockStore from 'redux-mock-store';
 import * as ReactReduxHooks from "../../../redux/Hooks/ReactReduxHooks";
 import ContactStubStore from '../../../shared/Stubs/ContactStubStore';
 import { GET_CONTACTS } from '../../../redux/Actions/ContactAction';
+
 
 Enzyme.configure({ adapter: new Adapter() });
 const mockStore = configureMockStore();
@@ -90,6 +91,12 @@ describe('<ContactList />', () => {
         fireEvent.click(closeButton);
         fireEvent.click(buttons[0]);
         fireEvent.mouseUp(buttons[0]);
+    });
+
+    test("calls handleKeySelected" , () => {
+        const {container} = render(<ContactList />);
+        const tabButton = container.querySelectorAll('[href="#"]');
+        fireEvent.click(tabButton[0]);
     });
 
 });

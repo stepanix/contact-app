@@ -42,7 +42,9 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/dom": "^6.10.1",
     "@testing-library/react": "^9.3.2",
+    "@testing-library/react-hooks": "^3.2.1",
     "axios-mock-adapter": "^1.17.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",

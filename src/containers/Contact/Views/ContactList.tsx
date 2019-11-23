@@ -8,8 +8,6 @@ import Col from 'react-bootstrap/Col';
 import Spinner from 'react-bootstrap/Spinner';
 import Badge from 'react-bootstrap/Badge';
 
-import { useDispatch, useSelector } from "react-redux";
-
 import { GET_CONTACTS } from "../../../redux/Actions/ContactAction";
 import { ActionModel } from "../../../shared/Models/ActionModel";
 
@@ -24,11 +22,13 @@ import { ContactModel } from "../Models/ContactModel";
 import { configJson } from "../../../configs/config";
 
 import ContactDetail from "./ContactDetail";
-
+import { useSelector, useDispatch } from "../../../redux/Hooks/ReactReduxHooks";
 
 const getContactAction = (): ActionModel => ({
     type: GET_CONTACTS
 });
+
+let contactState: any;
 
 const ContactList = () => {
 
@@ -40,14 +40,12 @@ const ContactList = () => {
     const [contactSelected, setContactSelected] = useState();
 
     const dispatch = useDispatch();
-
-    const contactList: ContactModel[] = useSelector((state: any) => state.contact.contactList);
-    const isLoading: boolean = useSelector((state: any) => state.contact.isLoading);
-
+   
+    contactState = useSelector((state: any) => state.contact);
+    
     useEffect(() => {
         dispatch(getContactAction());
     }, [dispatch]);
-
 
     const handleKeySelected = (key: string) => {
         if (show) {
@@ -82,7 +80,7 @@ const ContactList = () => {
     };
 
     const getTabData = () => {
-        let contactsSelected = getContactsSelectedByKey(contactList, key);
+        let contactsSelected = getContactsSelectedByKey(contactState.contactList, key);
         const details = <div> <hr></hr> {contactsSelected.length > 0 ? <Row>
             {contactsSelected.map((item: ContactModel, index: any) => (
                 <Col md={6} key={index}>
@@ -95,14 +93,14 @@ const ContactList = () => {
     };
 
     const getTitleTab = (key: string) => {
-        return <div> {key} {" "} <Badge variant="info">{getCountOfContactsSelectedByKey(contactList, key)} </Badge></div>;
+        return <div> {key} {" "} <Badge variant="info">{getCountOfContactsSelectedByKey(contactState.contactList, key)} </Badge></div>;
     }
 
     return (<div className="container component-container">
 
         <div className="page-title">{configJson.title}</div>
 
-        {!isLoading ? <Card>
+        {!contactState.isLoading ? <Card>
             <div className="tab-container">
 
                 {contactCardView()}

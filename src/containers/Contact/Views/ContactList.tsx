@@ -30,7 +30,7 @@ const getContactAction = (): ActionModel => ({
 
 let contactState: any;
 
-const ContactList = () => {
+const ContactList: React.FC = () => {
 
     const [show, setShow] = useState(false);
     const [key, setKey] = useState('a');
@@ -72,7 +72,7 @@ const ContactList = () => {
             show ?
                 <div className="contact-card-parent-container" style={{ left: currentLeft, top: currentTop }}>
                     <Card className="contact-card-container">
-                        <div className="close-button" onClick={() => setShow(false)}> X </div>
+                        <div aria-label="close-contact-card" className="close-button" onClick={() => setShow(false)}> X </div>
                         <div className="contact-card-header">{contactSelected ? contactSelected.name.first : ''},  <span className="bold-text">{contactSelected ? convertToUpper(contactSelected.name.last) : ''} </span></div>
                         <div> {contactSelected ? <ContactDetail contact={contactSelected} /> : ''} </div>
                     </Card></div>
@@ -84,7 +84,7 @@ const ContactList = () => {
         const details = <div> <hr></hr> {contactsSelected.length > 0 ? <Row>
             {contactsSelected.map((item: ContactModel, index: any) => (
                 <Col md={6} key={index}>
-                    <div onMouseUp={handleMouseUp} className="custom-link" onClick={() => handleContactSelected(item)}> {item.name.first},  <span className="bold-text">{convertToUpper(item.name.last)}</span> </div>
+                    <button  onMouseUp={handleMouseUp} className="link-button" onClick={() => handleContactSelected(item)}> {item.name.first},  <span className="bold-text">{convertToUpper(item.name.last)}</span> </button>
                     <hr></hr>
                 </Col>
             ))}

@@ -70,7 +70,7 @@ const ContactList: React.FC = () => {
 
     const handleHideCardView = (event) => {
         event.stopPropagation();
-        setShow(false)
+        setShow(false);
     }
 
     const contactCardView = () => {
@@ -107,7 +107,7 @@ const ContactList: React.FC = () => {
         <div className="page-title">{configJson.title}</div>
 
         {!contactState.isLoading ? <Card>
-            <div aria-label="main-contact-screen" className="tab-container" onClick={() => setShow(false)}>
+            <div aria-label="main-contact-screen" className="tab-container">
 
                 {contactCardView()}
 

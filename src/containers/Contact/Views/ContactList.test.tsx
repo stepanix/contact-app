@@ -99,4 +99,9 @@ describe('<ContactList />', () => {
         fireEvent.click(tabButton[0]);
     });
 
+    test("calls handleHideCardView" , () => {
+        const mainContactScreen = wrapper.getByLabelText('main-contact-screen');
+        fireEvent.click(mainContactScreen);
+    });
+
 });

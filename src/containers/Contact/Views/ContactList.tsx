@@ -54,7 +54,8 @@ const ContactList: React.FC = () => {
         setKey(key);
     };
 
-    const handleContactSelected = (contact: ContactModel) => {
+    const handleContactSelected = (contact: ContactModel, event: any) => {
+        event.stopPropagation();
         setContactSelected(contact);
     }
 
@@ -67,12 +68,17 @@ const ContactList: React.FC = () => {
         setCurrentTop(pos.y);
     }
 
+    const handleHideCardView = (event) => {
+        event.stopPropagation();
+        setShow(false)
+    }
+
     const contactCardView = () => {
         return <div className="container"> {
             show ?
                 <div className="contact-card-parent-container" style={{ left: currentLeft, top: currentTop }}>
                     <Card className="contact-card-container">
-                        <div aria-label="close-contact-card" className="close-button" onClick={() => setShow(false)}> X </div>
+                        <div aria-label="close-contact-card" className="close-button" onClick={handleHideCardView}> X </div>
                         <div className="contact-card-header">{contactSelected ? contactSelected.name.first : ''},  <span className="bold-text">{contactSelected ? convertToUpper(contactSelected.name.last) : ''} </span></div>
                         <div> {contactSelected ? <ContactDetail contact={contactSelected} /> : ''} </div>
                     </Card></div>
@@ -84,7 +90,7 @@ const ContactList: React.FC = () => {
         const details = <div> <hr></hr> {contactsSelected.length > 0 ? <Row>
             {contactsSelected.map((item: ContactModel, index: any) => (
                 <Col md={6} key={index}>
-                    <button  onMouseUp={handleMouseUp} className="link-button" onClick={() => handleContactSelected(item)}> {item.name.first},  <span className="bold-text">{convertToUpper(item.name.last)}</span> </button>
+                    <button onMouseUp={handleMouseUp} className="link-button" onClick={(e) => handleContactSelected(item, e)}> {item.name.first},  <span className="bold-text">{convertToUpper(item.name.last)}</span> </button>
                     <hr></hr>
                 </Col>
             ))}
@@ -101,7 +107,7 @@ const ContactList: React.FC = () => {
         <div className="page-title">{configJson.title}</div>
 
         {!contactState.isLoading ? <Card>
-            <div className="tab-container">
+            <div aria-label="main-contact-screen" className="tab-container" onClick={() => setShow(false)}>
 
                 {contactCardView()}
 
